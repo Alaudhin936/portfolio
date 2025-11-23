@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Skip rewrite for actual files that exist
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Skip rewrite for assets, css, js, and other static files
+RewriteRule \.(css|js|map|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|json)$ - [L]
+
+# Redirect all other requests to index.html (but not for index.html itself)
+RewriteCond %{REQUEST_URI} !^/index\.html$
+RewriteRule ^(.*)$ /index.html [L,QSA]
